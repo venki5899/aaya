@@ -207,7 +207,7 @@
 </div>
 
 <div class="container">
-  <h2>Building Parameter Calculator</h2>
+  <h2>Aaya Calculator</h2>
   <label for="lengthFeet">Length (Feet & Inches):</label>
   <div class="input-group">
     <input type="number" id="lengthFeet" placeholder="Feet">
@@ -270,9 +270,9 @@
     let dhanaClass = dhana < vruna ? 'red' : 'green';
     let vrunaClass = dhana < vruna ? 'red' : 'green';
     let thiti = (area * 8) % 30 || 30;
-    let varaNumber = (area * 9) % 7 || 7;
-    let varaNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    let varaDisplay = `${varaNumber} (${varaNames[varaNumber - 1]})`;
+    let vaaraNumber = (area * 9) % 7 || 7;
+    let vaaraNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let vaaraDisplay = `${vaaraNumber} (${vaaraNames[vaaraNumber - 1]})`;
     let nakshatra = (area * 8) % 27 || 27;
     let yoga = (area * 4) % 27 || 27;
     let karana = (area * 5) % 11 || 11;
@@ -285,7 +285,7 @@
       <p><strong>Vruna:</strong> <a href="dhana.html" target="_blank" class="${vrunaClass}">${vruna}</a></p>
       <p><strong>Ayushya:</strong> <a href="ayushya.html" target="_blank" class="${ayushyaClass}">${ayushya} Years</a></p>
       <p><strong>Thiti:</strong> <a href="thiti.html" target="_blank">${thiti}</a></p>
-      <p><strong>Vara:</strong> <a href="vaara.html" target="_blank">${varaDisplay}</a></p>
+      <p><strong>Vaara:</strong> <a href="vaara.html" target="_blank">${vaaraDisplay}</a></p>
       <p><strong>Nakshatra:</strong> <a href="nakshatra.html" target="_blank">${nakshatra}</a></p>
       <p><strong>Yoga:</strong> <a href="yoga.html" target="_blank">${yoga}</a></p>
       <p><strong>Karana:</strong> <a href="karana.html" target="_blank">${karana}</a></p>
