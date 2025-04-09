@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Building Calculation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background: #007BFF;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .navbar h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .input-group {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    input {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    button {
+      padding: 12px;
+      margin-top: 10px;
+      width: 100%;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .calculate-btn {
+      background: blue;
+      color: white;
+    }
+
+    .clear-btn {
+      background: red;
+      color: white;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    @media (max-width: 500px) {
+      .input-group {
+        flex-direction: column;
+      }
+
+      input {
+        width: 100%;
+      }
+
+      .navbar {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <h2>Aaya Calculation</h2>
+    <div id="google_translate_element"></div>
+  </div>
+
+  <div class="container">
+    <h2>Building Parameter Calculator</h2>
+    <label for="lengthFeet">Length (Feet & Inches):</label>
+    <div class="input-group">
+      <input type="number" id="lengthFeet" placeholder="Feet">
+      <input type="number" id="lengthInches" placeholder="Inches">
+    </div>
+
+    <label for="widthFeet">Width (Feet & Inches):</label>
+    <div class="input-group">
+      <input type="number" id="widthFeet" placeholder="Feet">
+      <input type="number" id="widthInches" placeholder="Inches">
+    </div>
+
+    <button class="calculate-btn" onclick="calculate()">Calculate</button>
+    <button class="clear-btn" onclick="clearFields()">Clear</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculate() {
+      let lengthFeet = parseFloat(document.getElementById('lengthFeet').value) || 0;
+      let lengthInches = parseFloat(document.getElementById('lengthInches').value) || 0;
+      let widthFeet = parseFloat(document.getElementById('widthFeet').value) || 0;
+      let widthInches = parseFloat(document.getElementById('widthInches').value) || 0;
+
+      let area, unit;
+
+      if (lengthInches === 0 && widthInches === 0) {
+        area = lengthFeet * widthFeet;
+        unit = "sq ft";
+      } else {
+        let totalLength = (lengthFeet * 12) + lengthInches;
+        let totalWidth = (widthFeet * 12) + widthInches;
+        area = totalLength * totalWidth;
+        unit = "sq in";
+      }
+
+      const aayaCategoryNames = [
+        "1 Dhvajaya (Flag House)",
+        "2 Dromaya (Drum House)",
+        "3 Simhaya (Lion House)",
+        "4 Sunakaya (Dog House)",
+        "5 Vrushabhaya (Bull House)",
+        "6 Karayashaya (Elephant House)",
+        "7 Gajashaya (Elephant House)",
+        "8 Vayasaya (Horse House)"
+      ];
+
+      let aayaIndex = (area % 8) || 8;
+      let aaya = aayaCategoryNames[aayaIndex - 1];
+      let aayaKey = aaya.split(" ")[1]; // e.g., "Dhvajaya"
+
+      const greenAayas = ["Dhvajaya", "Simhaya", "Vrushabhaya", "Gajashaya"];
+      let aayaColor = greenAayas.includes(aayaKey) ? 'green' : 'red';
+
+      let dhana = (area * 8) % 12 || 12;
+      let vruna = (area * 3) % 8;
+      let ayushya = ((area * 9) % 120).toFixed(0);
+      let ayushyaColor = ayushya > 60 ? 'green' : 'red';
+
+      let thiti = (area * 8) % 30 || 30;
+      let vara = (area * 9) % 7 || 7;
+      let nakshatra = ((area * 8) % 7).toFixed(0);
+      let yoga = ((area * 4) % 27).toFixed(0);
+      let karana = (area * 5) % 11 || 11;
+      let amsha = (area * 6) % 9 || 9;
+
+      let dhanaColor = dhana < vruna ? 'red' : 'black';
+
+      document.getElementById('result').innerHTML = `
+        <p><strong>Total Area:</strong> ${area.toFixed(2)} ${unit}</p>
+        <p><strong>Aaya Category:</strong> <span style="color:${aayaColor}">${aaya}</span></p>
+        <p><strong>Dhana:</strong> <span style="color:${dhanaColor}">${dhana}</span></p>
+        <p><strong>Vruna:</strong> ${vruna}</p>
+        <p><strong>Ayushya:</strong> <span style="color:${ayushyaColor}">${ayushya} Years</span></p>
+        <p><strong>Thiti:</strong> ${thiti}</p>
+        <p><strong>Vara:</strong> ${vara}</p>
+        <p><strong>Nakshatra:</strong> ${nakshatra}</p>
+        <p><strong>Yoga:</strong> ${yoga}</p>
+        <p><strong>Karana:</strong> ${karana}</p>
+        <p><strong>Amsha:</strong> ${amsha}</p>
+      `;
+    }
+
+    function clearFields() {
+      document.getElementById('lengthFeet').value = '';
+      document.getElementById('lengthInches').value = '';
+      document.getElementById('widthFeet').value = '';
+      document.getElementById('widthInches').value = '';
+      document.getElementById('result').innerHTML = '';
+    }
+  </script>
+</body>
+</html>

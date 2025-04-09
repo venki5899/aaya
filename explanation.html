@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+       /* Navbar Styles */
+       .navbar {
+            background: #007BFF;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .navbar h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+        .navbar select {
+            padding: 5px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+
+     
+        body {
+            font-family: 'Noto Sans Kannada', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1, h2 {
+            color: #2a5d84;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.4em;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            margin: 10px 0 20px 20px;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+
+            p, ul li {
+                font-size: 0.95em;
+            }
+
+            .container {
+                padding: 15px;
+            }
+        }
+
+</style>
+<body>
+     <!-- Navbar -->
+     <div class="navbar">
+        <h2>Aaya Calculation</h2>
+        <div id="google_translate_element"></div>
+    </div>
+</head>
+<body>
+    <div class="container">
+        <h1>Aaya Calculation</h1>
+
+        <p>
+            Aaya is a traditional Vastu Shastra method used to evaluate the suitability and auspiciousness of a house plan based on its dimensions. 
+            This calculation involves a few logical steps that help identify the Aaya type, which is directly linked to the energy and prosperity of the home.
+        </p>
+
+        <h2>Step 1: Determine the Inner-to-Inner Dimension</h2>
+        <p>
+            Start by measuring the internal length and width of the house, excluding the thickness of the walls. 
+            Multiply the inner length by the inner width to get the total usable area of the house.
+        </p>
+
+        <h2>Step 2: Multiply the Area by 9</h2>
+        <p>
+            Once the total area is obtained, multiply it by 9. 
+            This step aligns with the traditional Aaya calculation method mentioned in ancient texts.
+        </p>
+
+        <h2>Step 3: Divide the Result by 8</h2>
+        <p>
+            Take the product from the previous step and divide it by 8. 
+            This division helps in determining the remainder, which is key to identifying the Aaya type.
+        </p>
+
+        <h2>Step 4: Find the Remainder</h2>
+        <p>
+            Focus on the decimal part of the division result. 
+            Multiply this decimal portion by 8 to get the remainder. 
+            The remainder will be a whole number between 0 and 7.
+        </p>
+
+        <h2>Step 5: Identify the Aaya Type</h2>
+        <p>
+            Use the remainder to identify the corresponding Aaya.<br>
+            If the remainder is <strong>1</strong>, the house falls under the <strong>Dhwajaya Aaya</strong> category.
+        </p>
+
+        <p><strong>Here is the complete list of Aaya types based on the remainder:</strong></p>
+        <ul>
+            <li><strong>1 – Dhwajaya</strong> (Flag House)</li>
+            <li><strong>2 – Dromaya</strong> (Drum House)</li>
+            <li><strong>3 – Simhaya</strong> (Lion House)</li>
+            <li><strong>4 – Sunakaya</strong> (Dog House)</li>
+            <li><strong>5 – Vrushabhaya</strong> (Bull House)</li>
+            <li><strong>6 – Karayashaya</strong> (Elephant House)</li>
+            <li><strong>7 – Gajashaya</strong> (Elephant House)</li>
+            <li><strong>8 – Vayasaya</strong> (Horse House)</li>
+        </ul>
+    </div>
+    </div>
+    <div class="container">
+        <h1>ಆಯ ಗಣನೆ - ಆಯ ಫಲಿತಾಂಶ</h1>
+
+        <p>
+            ಆಯ ಎನ್ನುವುದು ವಾಸ್ತು ಶಾಸ್ತ್ರದಲ್ಲಿ ಮನೆ ಯೋಜನೆಯ ಸೂಕ್ತತೆಯನ್ನು ಮತ್ತು ಶುಭತೆಯನ್ನು ಅಳೆಯುವ ಪರಂಪರಾ ವಿಧಾನವಾಗಿದೆ. 
+            ಈ ಗಣನೆ ಕೆಲವೊಂದು ತಾಳಮೇಳದ ಹಂತಗಳನ್ನು ಒಳಗೊಂಡಿರುತ್ತದೆಯಾದ್ದರಿಂದ ಅದು ಮನೆಯ ಶಕ್ತಿ ಮತ್ತು ಸೌಭಾಗ್ಯದೊಂದಿಗೆ ನೇರವಾಗಿ ಸಂಪರ್ಕ ಹೊಂದಿರುತ್ತದೆ.
+        </p>
+
+        <h2>ಹಂತ 1: ಒಳದಿಂದ ಒಳದ ಚೌಕವರ್ಗದ ಆಯಾಮವನ್ನು ನಿರ್ಧರಿಸಿ</h2>
+        <p>
+            ಗೋಪುರದ ದಪ್ಪವನ್ನು ಹೊರತುಪಡಿಸಿ ಮನೆಗೆ ಒಳಗಿನ ಉದ್ದ ಮತ್ತು ಅಗಲವನ್ನು ಅಳೆಯಿರಿ. 
+            ಒಳಗಿನ ಉದ್ದವನ್ನು ಅಗಲದಿಂದ ಗುಣಿಸಿ ಮನೆಯ ಬಳಕೆಯಾದಷ್ಟು ಪ್ರದೇಶವನ್ನು ಕಂಡುಹಿಡಿಯಿರಿ.
+        </p>
+
+        <h2>ಹಂತ 2: ಒಟ್ಟು ಪ್ರದೇಶವನ್ನು 9 ರಿಂದ ಗುಣಿಸಿ</h2>
+        <p>
+            ಒಟ್ಟು ಪ್ರದೇಶವನ್ನು ಲಭ್ಯವಾದ ನಂತರ, ಅದನ್ನು 9 ರಿಂದ ಗುಣಿಸಿ. 
+            ಈ ಹಂತವು ಆಯಾ ಗಣನೆಗೆ ಸಂಬಂಧಿಸಿದಂತೆ ಶಿಲ್ಪಶಾಸ್ತ್ರದ ಪಾಠಗಳಲ್ಲಿ ಉಲ್ಲೇಖಿತವಾದ ಪದ್ಧತಿಗೆ ಅನುಗುಣವಾಗಿದೆ.
+        </p>
+
+        <h2>ಹಂತ 3: ಫಲಿತಾಂಶವನ್ನು 8 ರಿಂದ ಭಾಗಿಸಿ</h2>
+        <p>
+            ಹಿಂದಿನ ಹಂತದಲ್ಲಿ ಲಭಿಸಿದ ಫಲಿತಾಂಶವನ್ನು 8 ರಿಂದ ಭಾಗಿಸಿ. 
+            ಈ ಹಂತವು ಉಳಿದಿಯನ್ನು ನಿರ್ಧರಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ, ಇದು ಆಯಾ ಶ್ರೇಣಿಯನ್ನು ಗುರುತಿಸಲು ಪ್ರಮುಖವಾಗಿರುತ್ತದೆ.
+        </p>
+
+        <h2>ಹಂತ 4: ಉಳಿದಿಯನ್ನು ಕಂಡುಹಿಡಿಯಿರಿ</h2>
+        <p>
+            ಭಾಗಾಕಾರ ಫಲಿತಾಂಶದ ದಶಮಾಂಶ ಭಾಗದ ಮೇಲೆ ಗಮನವಿಡಿ. 
+            ಈ ದಶಮಾಂಶವನ್ನು 8 ರಿಂದ ಗುಣಿಸಿ ಉಳಿದಿಯನ್ನು ಪಡೆಯಿರಿ. 
+            ಉಳಿದಿಯು 0 ರಿಂದ 7ರ ನಡುವೆ ಯಾವುದೇ ಪೂರ್ಣಾಂಕವಾಗಿರುತ್ತದೆ.
+        </p>
+
+        <h2>ಹಂತ 5: ಆಯಾ ಶ್ರೇಣಿಯನ್ನು ಗುರುತಿಸಿ</h2>
+        <p>
+            ಉಳಿದಿಯ ಆಧಾರದಲ್ಲಿ ಆಯಾ ಶ್ರೇಣಿಯನ್ನು ಗುರುತಿಸಿ.<br>
+            ಉಳಿದಿಯು <strong>1</strong> ಆಗಿದ್ದರೆ, ಮನೆ <strong>ಧ್ವಜಯ ಆಯ</strong> ಶ್ರೇಣಿಗೆ ಸೇರಿದೆ.
+        </p>
+
+        <p><strong>ಉಳಿದಿಯನ್ನು ಆಧರಿಸಿ ಆಯಾ ಶ್ರೇಣಿಗಳ ಪಟ್ಟಿ:</strong></p>
+        <ul>
+            <li><strong>1 – ಧ್ವಜಯ</strong> (ಧ್ವಜದ ಮನೆ)</li>
+            <li><strong>2 – ದ್ರೋಮಯ</strong> (ಡೋಲು ಮನೆ)</li>
+            <li><strong>3 – ಸಿಂಹಯ</strong> (ಸಿಂಹದ ಮನೆ)</li>
+            <li><strong>4 – ಸುನಕಯ</strong> (ನಾಯಿಯ ಮನೆ)</li>
+            <li><strong>5 – ವೃಷಭಯ</strong> (ಎಮ್ಮೆಯ ಮನೆ)</li>
+            <li><strong>6 – ಕರಯಶಯ</strong> (ಅನೆ ಮನೆಯ 1)</li>
+            <li><strong>7 – ಗಜಶಯ</strong> (ಅನೆ ಮನೆಯ 2)</li>
+            <li><strong>8 – ವಾಯಸಯ</strong> (ಕುದುರೆ ಮನೆ)</li>
+        </ul>
+    </div>
+</body>
+</html>

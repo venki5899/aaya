@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Building Calculation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background: #007BFF;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .navbar h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .input-group {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    input {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    button {
+      padding: 12px;
+      margin-top: 10px;
+      width: 100%;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .calculate-btn {
+      background: blue;
+      color: white;
+    }
+
+    .clear-btn {
+      background: red;
+      color: white;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    .green {
+      color: green;
+      font-weight: bold;
+    }
+
+    .red {
+      color: red;
+      font-weight: bold;
+    }
+
+    @media (max-width: 500px) {
+      .input-group {
+        flex-direction: column;
+      }
+
+      input {
+        width: 100%;
+      }
+
+      .navbar {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .modal-content h3 {
+      margin-top: 0;
+    }
+
+    .modal-buttons button {
+      margin: 10px 5px 0 5px;
+      padding: 10px 15px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn-agree {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .btn-disagree {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .btn-agree-skip {
+      background-color: #007bff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Disclaimer Modal -->
+<div id="disclaimerModal" class="modal">
+  <div class="modal-content">
+    <h3>Disclaimer</h3>
+    <p>This application provides traditional building astrology calculations for reference only. By continuing, you acknowledge understanding and acceptance of this.</p>
+    <div class="modal-buttons">
+      <button class="btn-agree" onclick="agreeDisclaimer()">Agree</button>
+      <button class="btn-disagree" onclick="disagreeDisclaimer()">Don't Agree</button>
+      <button class="btn-agree-skip" onclick="agreeAndSkipDisclaimer()">Agree, Don't Ask Again</button>
+    </div>
+  </div>
+</div>
+
+<!-- Navbar -->
+<div class="navbar">
+  <h2>Aaya Calculation</h2>
+  <div id="google_translate_element"></div>
+</div>
+
+<div class="container">
+  <h2>Building Parameter Calculator</h2>
+  <label for="lengthFeet">Length (Feet & Inches):</label>
+  <div class="input-group">
+    <input type="number" id="lengthFeet" placeholder="Feet">
+    <input type="number" id="lengthInches" placeholder="Inches">
+  </div>
+
+  <label for="widthFeet">Width (Feet & Inches):</label>
+  <div class="input-group">
+    <input type="number" id="widthFeet" placeholder="Feet">
+    <input type="number" id="widthInches" placeholder="Inches">
+  </div>
+
+  <button class="calculate-btn" onclick="calculate()">Calculate</button>
+  <button class="clear-btn" onclick="clearFields()">Clear</button>
+
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+  function calculate() {
+    let lengthFeet = parseFloat(document.getElementById('lengthFeet').value) || 0;
+    let lengthInches = parseFloat(document.getElementById('lengthInches').value) || 0;
+    let widthFeet = parseFloat(document.getElementById('widthFeet').value) || 0;
+    let widthInches = parseFloat(document.getElementById('widthInches').value) || 0;
+
+    let area, unit;
+
+    if (lengthInches === 0 && widthInches === 0) {
+      area = lengthFeet * widthFeet;
+      unit = "sq ft";
+    } else {
+      let totalLength = (lengthFeet * 12) + lengthInches;
+      let totalWidth = (widthFeet * 12) + widthInches;
+      area = totalLength * totalWidth;
+      unit = "sq in";
+    }
+
+    const aayaCategoryNames = [
+      "1 Dhvajaya (Flag House)",
+      "2 Dromaya (Drum House)",
+      "3 Simhaya (Lion House)",
+      "4 Sunakaya (Dog House)",
+      "5 Vrushabhaya (Bull House)",
+      "6 Karayashaya (Elephant House)",
+      "7 Gajashaya (Elephant House)",
+      "8 Vayasaya (Horse House)"
+    ];
+
+    let aayaIndex = (area % 8) || 8;
+    let aaya = aayaCategoryNames[aayaIndex - 1];
+    let aayaKey = aaya.split(" ")[1];
+    const greenAayas = ["Dhvajaya", "Simhaya", "Vrushabhaya", "Gajashaya"];
+    let aayaClass = greenAayas.includes(aayaKey) ? 'green' : 'red';
+    let aayaLink = `<a href="explanation.html#${aayaKey.toLowerCase()}" target="_blank" class="${aayaClass}">${aaya}</a>`;
+
+    let dhana = (area * 8) % 12 || 12;
+    let vruna = (area * 3) % 8 || 8;
+    let ayushya = (area * 9) % 120 || 120;
+    let ayushyaClass = ayushya > 60 ? 'green' : 'red';
+    let dhanaClass = dhana < vruna ? 'red' : 'green';
+    let vrunaClass = dhana < vruna ? 'red' : 'green';
+    let thiti = (area * 8) % 30 || 30;
+    let varaNumber = (area * 9) % 7 || 7;
+    let varaNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let varaDisplay = `${varaNumber} (${varaNames[varaNumber - 1]})`;
+    let nakshatra = (area * 8) % 27 || 27;
+    let yoga = (area * 4) % 27 || 27;
+    let karana = (area * 5) % 11 || 11;
+    let amsha = (area * 6) % 9 || 9;
+
+    document.getElementById('result').innerHTML = `
+      <p><strong>Total Area:</strong> ${area.toFixed(2)} ${unit}</p>
+      <p><strong>Aaya Category:</strong> ${aayaLink}</p>
+      <p><strong>Dhana:</strong> <a href="dhana.html" target="_blank" class="${dhanaClass}">${dhana}</a></p>
+      <p><strong>Vruna:</strong> <a href="dhana.html" target="_blank" class="${vrunaClass}">${vruna}</a></p>
+      <p><strong>Ayushya:</strong> <a href="ayushya.html" target="_blank" class="${ayushyaClass}">${ayushya} Years</a></p>
+      <p><strong>Thiti:</strong> <a href="thiti.html" target="_blank">${thiti}</a></p>
+      <p><strong>Vara:</strong> <a href="vaara.html" target="_blank">${varaDisplay}</a></p>
+      <p><strong>Nakshatra:</strong> <a href="nakshatra.html" target="_blank">${nakshatra}</a></p>
+      <p><strong>Yoga:</strong> <a href="yoga.html" target="_blank">${yoga}</a></p>
+      <p><strong>Karana:</strong> <a href="karana.html" target="_blank">${karana}</a></p>
+      <p><strong>Amsha:</strong> <a href="amsha.html" target="_blank">${amsha}</a></p>
+    `;
+  }
+
+  function clearFields() {
+    document.getElementById('lengthFeet').value = '';
+    document.getElementById('lengthInches').value = '';
+    document.getElementById('widthFeet').value = '';
+    document.getElementById('widthInches').value = '';
+    document.getElementById('result').innerHTML = '';
+  }
+
+  function agreeDisclaimer() {
+    document.getElementById('disclaimerModal').style.display = 'none';
+  }
+
+  function disagreeDisclaimer() {
+    alert("You must accept the disclaimer to continue using the app.");
+  }
+
+  function agreeAndSkipDisclaimer() {
+    localStorage.setItem('disclaimerAccepted', 'true');
+    document.getElementById('disclaimerModal').style.display = 'none';
+  }
+
+  window.onload = function () {
+    if (localStorage.getItem('disclaimerAccepted') !== 'true') {
+      document.getElementById('disclaimerModal').style.display = 'flex';
+    }
+  }
+</script>
+
+</body>
+</html>
