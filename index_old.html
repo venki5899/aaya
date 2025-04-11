@@ -4,76 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Building Calculation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    .navbar {
-      background: #007BFF;
+    .navbar-custom {
+      background-color: #007BFF;
       color: white;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
     }
 
-    .navbar h2 {
-      margin: 0;
+    .navbar-custom h2 {
       font-size: 20px;
+      margin: 0;
     }
 
-    .container {
-      max-width: 600px;
-      margin: 20px auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .input-group {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    input {
-      flex: 1;
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      text-align: center;
-    }
-
-    button {
-      padding: 12px;
-      margin-top: 10px;
-      width: 100%;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    .calculate-btn {
-      background: blue;
-      color: white;
-    }
-
-    .clear-btn {
-      background: red;
-      color: white;
-    }
-
-    .result {
-      margin-top: 20px;
-      font-size: 16px;
+    .result a {
+      text-decoration: none;
     }
 
     .green {
@@ -86,116 +30,232 @@
       font-weight: bold;
     }
 
-    @media (max-width: 500px) {
-      .input-group {
-        flex-direction: column;
-      }
-
-      input {
-        width: 100%;
-      }
-
-      .navbar {
-        flex-direction: column;
-        text-align: center;
-      }
+    .modal-backdrop.show {
+      opacity: 0.6;
     }
-
-    /* Modal Styles */
-    .modal {
-      display: none;
+    .sidebar {
+      min-height: 100vh;
+      transition: transform 0.3s ease;
+    }
+    .overlay {
       position: fixed;
-      z-index: 999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.6);
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+.nav-link.text-dark:hover {
+  color: #fdfeff !important;
+  background-color: #007BFF;
+}
+
+.hamburger-btn {
+      width: 45px;
+      height: 45px;
+      background-color: #007BFF;
+      border: 2px solid #007BFF;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 10px;
+      gap: 6px;
+      padding: 5px;
+      margin: 10px;
     }
 
-    .modal-content {
-      background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 400px;
-      width: 100%;
-      text-align: center;
+    .hamburger-btn span {
+      display: block;
+      width: 28px;
+      height: 4px;
+      background-color: #ffffff;
+      border-radius: 4px;
     }
 
-    .modal-content h3 {
-      margin-top: 0;
-    }
-
-    .modal-buttons button {
-      margin: 10px 5px 0 5px;
-      padding: 10px 15px;
-      font-size: 14px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .btn-agree {
-      background-color: #28a745;
-      color: white;
-    }
-
-    .btn-disagree {
-      background-color: #dc3545;
-      color: white;
-    }
-
-    .btn-agree-skip {
-      background-color: #007bff;
-      color: white;
+    .hamburger-btn:hover span {
+      background-color: #000102;
     }
   </style>
 </head>
 <body>
 
+  
+<!-- <div id="overlay" class="overlay d-none d-lg-none" onclick="toggleSidebar()"></div> -->
+
+<!-- Sidebar (small and medium devices only) -->
+<!-- <div id="sidebar" class="d-none d-lg-none bg-dark text-white sidebar position-fixed w-75 h-100 z-3 p-3">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0">My Menu</h4>
+    <button class="btn btn-sm btn-light" onclick="toggleSidebar()">×</button>
+  </div>
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">🏠 Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">📄 About</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">📞 Contact</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">⚙️ Settings</a>
+    </li>
+  </ul>
+</div> -->
+
+<!-- Toggle Button (visible on small and medium devices) -->
+<!-- <div class="d-block d-lg-none p-2 bg-light">
+  <button class="btn btn-dark" onclick="toggleSidebar()">☰ Menu</button>
+</div> -->
+
 <!-- Disclaimer Modal -->
-<div id="disclaimerModal" class="modal">
-  <div class="modal-content">
-    <h3>Disclaimer</h3>
-    <p>This application provides traditional building astrology calculations for reference only. By continuing, you acknowledge understanding and acceptance of this.</p>
-    <div class="modal-buttons">
-      <button class="btn-agree" onclick="agreeDisclaimer()">Agree</button>
-      <button class="btn-disagree" onclick="disagreeDisclaimer()">Don't Agree</button>
-      <button class="btn-agree-skip" onclick="agreeAndSkipDisclaimer()">Agree, Don't Ask Again</button>
+<div class="modal fade" id="disclaimerModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <h5 class="modal-title">Disclaimer</h5>
+      </div>
+      <div class="modal-body">
+        <p>This application provides traditional building astrology calculations for reference only. By continuing, you acknowledge understanding and acceptance of this.</p>
+        <div class="d-flex flex-column align-items-center gap-2">
+          <button class="btn btn-success w-75" onclick="agreeDisclaimer()">Agree</button>
+          <button class="btn btn-danger w-75" onclick="disagreeDisclaimer()">Don't Agree</button>
+          <button class="btn btn-primary w-75" onclick="agreeAndSkipDisclaimer()">Agree, Don't Ask Again</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
+
+<!-- Overlay -->
+<div id="overlay" class="overlay d-none d-lg-none" onclick="toggleSidebar()"></div>
+
+<!-- Sidebar (small and medium devices only) -->
+<div id="sidebar" class="d-none d-lg-none bg-white text-dark sidebar position-fixed w-75 h-100 z-3 p-3">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0">Menu</h4>
+    <button class="btn btn-sm btn-primary" onclick="toggleSidebar()">×</button>
+  </div>
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a class="nav-link text-dark" href="index.html">🏠 Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-dark" href="about.html">📄 About</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-dark" href="privacypolicy.html">🔒 Privacypolicy</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-dark" href="disclimer.html">📢 Disclimer</a>
+    </li>
+  </ul>
+</div>
+
+
+
 <!-- Navbar -->
-<div class="navbar">
-  <h2>Aaya Calculation</h2>
-  <div id="google_translate_element"></div>
+<nav class="navbar navbar-custom px-3 py-2">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+
+    <!-- Sidebar Toggle Button -->
+    <!-- <div class="d-block d-lg-none">
+      <button class="btn btn-primary" onclick="toggleSidebar()">☰</button>
+    </div> -->
+
+    
+<!-- Overlay -->
+<div id="overlay" class="overlay d-none" onclick="toggleSidebar()"></div>
+
+<!-- Hamburger Button -->
+<div class="d-block d-lg-none">
+  <button class="hamburger-btn" onclick="toggleSidebar()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </div>
 
-<div class="container">
-  <h2>Building Parameter Calculator</h2>
-  <label for="lengthFeet">Length (Feet & Inches):</label>
-  <div class="input-group">
-    <input type="number" id="lengthFeet" placeholder="Feet">
-    <input type="number" id="lengthInches" placeholder="Inches">
+
+
+    <!-- Title -->
+    <div class="flex-grow-1 d-flex justify-content-center">
+      <h2 class="text-white m-0">Aaya Calculation</h2>
+    </div>
+
+    <!-- Google Translate -->
+    <div id="google_translate_element" class="ms-3"></div>
   </div>
+</nav>
 
-  <label for="widthFeet">Width (Feet & Inches):</label>
-  <div class="input-group">
-    <input type="number" id="widthFeet" placeholder="Feet">
-    <input type="number" id="widthInches" placeholder="Inches">
+<!-- Overlay -->
+<div id="overlay" class="overlay d-none" onclick="toggleSidebar()"></div>
+
+<!-- Sidebar Fullscreen -->
+<div id="sidebar" class="d-none bg-dark text-white position-fixed top-0 start-0 w-100 h-100 z-3 p-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0 fw-bold">My Menu</h4>
+    <button class="btn btn-sm btn-light" onclick="toggleSidebar()">×</button>
   </div>
-
-  <button class="calculate-btn" onclick="calculate()">Calculate</button>
-  <button class="clear-btn" onclick="clearFields()">Clear</button>
-
-  <div class="result" id="result"></div>
+  <ul class="nav flex-column">
+    <li class="nav-item mb-2">
+      <a class="nav-link text-white fs-5" href="#">🏠 Home</a>
+    </li>
+    <li class="nav-item mb-2">
+      <a class="nav-link text-white fs-5" href="#">📄 About</a>
+    </li>
+    <li class="nav-item mb-2">
+      <a class="nav-link text-white fs-5" href="#">📞 Contact</a>
+    </li>
+    <li class="nav-item mb-2">
+      <a class="nav-link text-white fs-5" href="#">⚙️ Settings</a>
+    </li>
+  </ul>
 </div>
 
+
+
+<!-- Main Container -->
+<div class="container my-4">
+  <div class="card p-4 shadow rounded">
+    <h2 class="mb-3 ">Aaya Calculator</h2>
+
+    <div class="mb-3">
+      <label for="lengthFeet" class="form-label">Length (Feet & Inches):</label>
+      <div class="row g-2">
+        <div class="col-6">
+          <input type="number" class="form-control text-center" id="lengthFeet" placeholder="Feet">
+        </div>
+        <div class="col-6">
+          <input type="number" class="form-control text-center" id="lengthInches" placeholder="Inches">
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="widthFeet" class="form-label">Width (Feet & Inches):</label>
+      <div class="row g-2">
+        <div class="col-6">
+          <input type="number" class="form-control text-center" id="widthFeet" placeholder="Feet">
+        </div>
+        <div class="col-6">
+          <input type="number" class="form-control text-center" id="widthInches" placeholder="Inches">
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary w-100 mt-2" onclick="calculate()">Calculate</button>
+    <button class="btn btn-danger w-100 mt-2" onclick="clearFields()">Clear</button>
+
+    <div class="result mt-4" id="result"></div>
+  </div>
+</div>
+
+<!-- JS (Original) -->
 <script>
   function calculate() {
     let lengthFeet = parseFloat(document.getElementById('lengthFeet').value) || 0;
@@ -240,9 +300,9 @@
     let dhanaClass = dhana < vruna ? 'red' : 'green';
     let vrunaClass = dhana < vruna ? 'red' : 'green';
     let thiti = (area * 8) % 30 || 30;
-    let varaNumber = (area * 9) % 7 || 7;
-    let varaNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    let varaDisplay = `${varaNumber} (${varaNames[varaNumber - 1]})`;
+    let vaaraNumber = (area * 9) % 7 || 7;
+    let vaaraNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let vaaraDisplay = `${vaaraNumber} (${vaaraNames[vaaraNumber - 1]})`;
     let nakshatra = (area * 8) % 27 || 27;
     let yoga = (area * 4) % 27 || 27;
     let karana = (area * 5) % 11 || 11;
@@ -255,7 +315,7 @@
       <p><strong>Vruna:</strong> <a href="dhana.html" target="_blank" class="${vrunaClass}">${vruna}</a></p>
       <p><strong>Ayushya:</strong> <a href="ayushya.html" target="_blank" class="${ayushyaClass}">${ayushya} Years</a></p>
       <p><strong>Thiti:</strong> <a href="thiti.html" target="_blank">${thiti}</a></p>
-      <p><strong>Vara:</strong> <a href="vaara.html" target="_blank">${varaDisplay}</a></p>
+      <p><strong>Vaara:</strong> <a href="vaara.html" target="_blank">${vaaraDisplay}</a></p>
       <p><strong>Nakshatra:</strong> <a href="nakshatra.html" target="_blank">${nakshatra}</a></p>
       <p><strong>Yoga:</strong> <a href="yoga.html" target="_blank">${yoga}</a></p>
       <p><strong>Karana:</strong> <a href="karana.html" target="_blank">${karana}</a></p>
@@ -272,7 +332,8 @@
   }
 
   function agreeDisclaimer() {
-    document.getElementById('disclaimerModal').style.display = 'none';
+    const modal = bootstrap.Modal.getInstance(document.getElementById('disclaimerModal'));
+    modal.hide();
   }
 
   function disagreeDisclaimer() {
@@ -281,15 +342,37 @@
 
   function agreeAndSkipDisclaimer() {
     localStorage.setItem('disclaimerAccepted', 'true');
-    document.getElementById('disclaimerModal').style.display = 'none';
+    const modal = bootstrap.Modal.getInstance(document.getElementById('disclaimerModal'));
+    modal.hide();
   }
 
   window.onload = function () {
     if (localStorage.getItem('disclaimerAccepted') !== 'true') {
-      document.getElementById('disclaimerModal').style.display = 'flex';
+      const disclaimerModal = new bootstrap.Modal(document.getElementById('disclaimerModal'), {
+        backdrop: 'static',
+        keyboard: false
+      });
+      disclaimerModal.show();
     }
   }
 </script>
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const isVisible = !sidebar.classList.contains('d-none');
+    
+    if (isVisible) {
+      sidebar.classList.add('d-none');
+      overlay.classList.add('d-none');
+    } else {
+      sidebar.classList.remove('d-none');
+      overlay.classList.remove('d-none');
+    }
+    
+  }
+</script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
