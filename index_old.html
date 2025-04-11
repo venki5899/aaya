@@ -256,11 +256,11 @@
     let widthInches = parseFloat(document.getElementById('widthInches').value) || 0;
 
     // Validation: Check if all values are zero
-    if (lengthFeet === 0 && lengthInches === 0 && widthFeet === 0 && widthInches === 0) {
-      const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-      errorModal.show();
-      return;
-    }
+    if ((lengthFeet === 0 && lengthInches === 0) || (widthFeet === 0 && widthInches === 0)) {
+  const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+  errorModal.show();
+  return;
+}
     
 
     let area, unit;
