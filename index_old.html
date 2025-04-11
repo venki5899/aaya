@@ -330,6 +330,27 @@
     document.getElementById('widthInches').value = '';
     document.getElementById('result').innerHTML = '';
   }
+  function agreeDisclaimer() {
+    const disclaimerModal = bootstrap.Modal.getInstance(document.getElementById("disclaimerModal"));
+    disclaimerModal.hide();
+  }
+
+  function disagreeDisclaimer()  {
+    alert("You must accept the disclaimer to continue using the app.");
+  }
+
+  function agreeAndSkipDisclaimer() {
+    localStorage.setItem("disclaimerAccepted", "true");
+    agreeDisclaimer();
+  }
+
+  // On page load, check if disclaimer is already accepted
+  window.onload = () => {
+    if (!localStorage.getItem("disclaimerAccepted")) {
+      const disclaimerModal = new bootstrap.Modal(document.getElementById("disclaimerModal"));
+      disclaimerModal.show();
+    }
+  }
 </script>
 <script>
   function toggleSidebar() {
